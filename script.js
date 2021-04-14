@@ -16,7 +16,7 @@ const songs = ['hey','summer','ukulele'];
 //keep track of song or index
 let songIndex = 2;
 //initial load song
-load_song()
+load_song("ukulele")
 
 // update song
 function load_song(song){
@@ -29,11 +29,34 @@ function playSong(){
  musicContainer.classList.add('play');
  play.querySelector('i.fas').classList.remove("fa-play");
  play.querySelector('i.fas').classList.add("fa-pause");
+ 
+ audio.play();
 }
 function pauseSong(){
   musicContainer.classList.remove('play');
-  lay.querySelector('i.fas').classList.remove("fa-pause");
-  play.querySelector('i.fas').classList.add("fa-play");
+   play.querySelector('i.fas').classList.add("fa-play");
+   play.querySelector('i.fas').classList.remove("fa-pause");
+ 
+
+ audio.pause();
+}
+
+function prevSong()
+{
+	songIndex--;
+	if(songIndex< 0){
+		songIndex=songs.length-1;
+	}
+	load_song(songs[songIndex]);
+	playSong();
+}
+function nextSong(){
+	songIndex++;
+	if(songIndex > songs.length-1){
+		songIndex=0;
+	}
+	load_song(songs[songIndex]);
+	playSong();
 }
 
 
@@ -49,6 +72,9 @@ play.addEventListener('click',function(){
 	}
 })
 
+//change song back
+prev.addEventListener('click'prevSong);
+next.addEventListener('click'nextSong);
 
 
 
