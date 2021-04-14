@@ -50,6 +50,7 @@ function prevSong()
 	load_song(songs[songIndex]);
 	playSong();
 }
+
 function nextSong(){
 	songIndex++;
 	if(songIndex > songs.length-1){
@@ -73,8 +74,8 @@ play.addEventListener('click',function(){
 })
 
 //change song back
-prev.addEventListener('click'prevSong);
-next.addEventListener('click'nextSong);
+prev.addEventListener('click',prevSong);
+next.addEventListener('click',nextSong);
 
 
 
