@@ -16,7 +16,7 @@ const songs = ['hey','summer','ukulele'];
 //keep track of song or index
 let songIndex = 2;
 //initial load song
-load_song("ukulele")
+load_song(songs[songIndex]);
 
 // update song
 function load_song(song){
