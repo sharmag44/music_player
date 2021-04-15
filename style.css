@@ -113,6 +113,10 @@ body {
   transition: transform 0.3s ease-in, opacity 0.3s ease-in;
   z-index: 0;
 }
+   #mainTitle{
+
+
+  }
 
 .music-container.play .music-info {
   opacity: 1;

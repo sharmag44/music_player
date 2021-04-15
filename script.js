@@ -11,10 +11,10 @@ const title = document.querySelector('#title');
 const cover = document.querySelector('#cover');
 
 //songs arry
-const songs = ['hey','summer','ukulele'];
+const songs = ['hey','summer','ukulele','leave the door open','one call away','peaches','sunflower','teach me how to love'];
 
 //keep track of song or index
-let songIndex = 2;
+let songIndex = songs.length-1;
 //initial load song
 load_song(songs[songIndex]);
 
@@ -40,27 +40,61 @@ function pauseSong(){
 
  audio.pause();
 }
-
-function prevSong()
-{
+function pressSpace(e){
+	if(e.keyCode===32){
+		audio.pause();
+	}
+	else{
+		audio.play();
+	}
+}
+function prevSong(e)
+{    if(e.keyCode===37)
+	{
 	songIndex--;
+   }
+   else{
+   	songIndex--;
 	if(songIndex< 0){
 		songIndex=songs.length-1;
 	}
+   }
+	
 	load_song(songs[songIndex]);
 	playSong();
 }
 
-function nextSong(){
-	songIndex++;
+function nextSong(e){
+	if(e.keyCode==38){
+		songIndex++;
+	}
+	else{
+		songIndex++;
 	if(songIndex > songs.length-1){
 		songIndex=0;
 	}
+	}
+	
+
 	load_song(songs[songIndex]);
 	playSong();
 }
 
 
+
+function updateProgress(e){
+	const {duration, currentTime} =e.srcElement;
+	const progressPercentage =  (currentTime/duration)*100;
+	progress.style.width=`${progressPercentage}%`;
+}
+
+function setProgress(e){
+	const width= this.clientWidth;
+	const clickX = e.offsetX;
+	const duration = audio.duration;
+
+	audio.currentTime =(clickX / width)* duration;
+}
 //Events listeners
 play.addEventListener('click',function(){
 	const isPlaying = musicContainer.classList.contains("play");
@@ -73,9 +107,13 @@ play.addEventListener('click',function(){
 	}
 })
 
-//change song back
-prev.addEventListener('click',prevSong);
-next.addEventListener('click',nextSong);
 
-
-
+//change song bac
+prev.addEventListener('click',prevSong)
+next.addEventListener('click',nextSong)
+audio.addEventListener('timeupdate',updateProgress)
+play.addEventListener('keydown',pressSpace)
+// prev.addEventListener('keydown',prevSong)
+// next.addEventListener('keydown',nextsong);
+progressContainer.addEventListener('click',setProgress);
+audio.addEventListener('ended',nextSong);
