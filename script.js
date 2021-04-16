@@ -53,12 +53,12 @@ function prevSong(e)
 	{
 	songIndex--;
    }
-   else{
+  
    	songIndex--;
 	if(songIndex< 0){
 		songIndex=songs.length-1;
 	}
-   }
+   
 	
 	load_song(songs[songIndex]);
 	playSong();
@@ -68,11 +68,11 @@ function nextSong(e){
 	if(e.keyCode==38){
 		songIndex++;
 	}
-	else{
+	
 		songIndex++;
 	if(songIndex > songs.length-1){
 		songIndex=0;
-	}
+	
 	}
 	
 
@@ -113,7 +113,7 @@ prev.addEventListener('click',prevSong)
 next.addEventListener('click',nextSong)
 audio.addEventListener('timeupdate',updateProgress)
 play.addEventListener('keydown',pressSpace)
-// prev.addEventListener('keydown',prevSong)
-// next.addEventListener('keydown',nextsong);
+prev.addEventListener('keydown',prevSong)
+next.addEventListener('keydown',nextsong);
 progressContainer.addEventListener('click',setProgress);
 audio.addEventListener('ended',nextSong);
